@@ -516,6 +516,8 @@ class RegistryEntry(object):
         self.logger.debug("Status Text: ")
         self.logger.debug(response.text)
         response_data = json.loads(response.text)
+        if 'revision' not in response_data.keys():
+            return ("0", 0)
         revision = response_data['revision']
         data = bytearray.fromhex(response_data['data']).decode()
         return (data, revision)
